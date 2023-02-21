@@ -18,7 +18,7 @@ public class Client {
             OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
             // Construct the message to send to the server
-            String message = "Lookup," + stockName + "\n";
+            String message = "Lookup," + stockName ;
             System.out.println("\n" + message);
             out.write(message);
             out.flush();
