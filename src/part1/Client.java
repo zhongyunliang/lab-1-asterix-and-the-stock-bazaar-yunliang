@@ -1,27 +1,28 @@
 package part1;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class Client {
     public static void main(String[] args) throws IOException {
         while(true){
-            Scanner input = new Scanner(System.in);
-            String stockName = input.next();
-            String hostname = "localhost"; // Change this to the hostname or IP address of the server
-            int port = 8888; // Change this to the port number the server is listening on
-            Socket socket = new Socket(hostname, port);
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Please enter the ip address of the server: ");
+            String ipAddress = scanner.nextLine();
+            System.out.println("Please enter the port number of the server: ");
+            int port = scanner.nextInt();
+            Socket socket = new Socket(ipAddress, port);
             // Set up input and output streams for the socket
-            OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
             // Construct the message to send to the server
+            System.out.println("Please enter the stock name you want to look up: ");
+            String stockName = scanner.next();
             String message = "Lookup," + stockName + "\n";
             System.out.println("\n" + message);
-            out.write(message);
-            out.flush();
+            //send msg to the server
+            out.println(message);
             // Read the response from the server
             String response = in.readLine();
             if (response.equals("-2.0")) {

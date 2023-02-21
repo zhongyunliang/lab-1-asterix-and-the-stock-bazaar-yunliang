@@ -7,10 +7,11 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
+//Runnable is used to execute thread without returning value.
 public class ClientHandler implements Runnable {
     private final Socket clientSocket;
     private static final int MAX_TRADING_VOLUME = 1000;
-    private static Map<String, Stock> stockCatalog = new HashMap<>();
+    private static final Map<String, Stock> stockCatalog = new HashMap<>();
 
     static {
         stockCatalog.put("GameStart", new Stock("GameStart", 10.00));
@@ -25,9 +26,9 @@ public class ClientHandler implements Runnable {
     public void run() {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true); //with autoFlush on, no need to use flush()
 
-            String request = in.readLine();
+            String request = in.readLine(); //request is in the formation of Lookup, stockName
             String[] tokens = request.split(",");
             String method = tokens[0];
             String stockName = tokens[1];
