@@ -1,6 +1,7 @@
 package part1;
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
 import java.util.concurrent.*;
 
 public class StockServer {
@@ -9,8 +10,11 @@ public class StockServer {
     private static InetAddress IP_ADDRESS;
    
     public static void main(String[] args) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("please enter the number of the thread" + "\n");
+        int threadsNum = scanner.nextInt();
         //create a static number (80) of threads and wait for requests
-        ExecutorService threadPool = Executors.newFixedThreadPool(MAX_THREADS);
+        ThreadPool threadPool = new ThreadPool(threadsNum);
         //get the ip address of the server
         try {
             IP_ADDRESS = InetAddress.getLocalHost();
