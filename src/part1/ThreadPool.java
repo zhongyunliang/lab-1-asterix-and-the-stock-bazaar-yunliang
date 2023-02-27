@@ -24,7 +24,5 @@ public class ThreadPool {
             queue.notify();
         }
     }
-
-
 }
 
