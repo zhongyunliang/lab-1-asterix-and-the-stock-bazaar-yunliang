@@ -7,13 +7,10 @@ import io.grpc.StatusRuntimeException;
 import java.util.Random;
 
 public class ClientThread implements Runnable {
-//    private static final String SERVER_ADDRESS = "localhost:8899";
-    private static final String[] STOCKS = {"GameStart", "FishCo", "BoarCo", "MenhirCo"};
-
     private final StockServiceGrpc.StockServiceBlockingStub blockingStub;
 
-    public ClientThread() {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("128.119.243.168", 8899)
+    public ClientThread(String IP_ADDRESS, int PORT) {
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(IP_ADDRESS, PORT)
                 .usePlaintext()
                 .build();
         blockingStub = StockServiceGrpc.newBlockingStub(channel);
@@ -24,22 +21,25 @@ public class ClientThread implements Runnable {
         Random random = new Random();
         long startTime = System.currentTimeMillis();
         for(int i = 0; i < 1000; i++){
+            //Random selection of request type and stock
             int stockIndex = random.nextInt(4) + 1;
-//            int functionIndex = random.nextInt(3) + 1;
-//            switch (functionIndex){
-//                case 1:
-//                    query(randomChooseStock(stockIndex));
-//                case 2:
-//                    trade(randomChooseStock(stockIndex), random.nextInt(5001), random.nextBoolean());
-//                case 3:
-//                    update(randomChooseStock(stockIndex));
-//            }
+            int functionIndex = random.nextInt(3) + 1;
+            switch (functionIndex){
+                case 1:
+                    query(randomChooseStock(stockIndex));
+                case 2:
+                    trade(randomChooseStock(stockIndex), random.nextInt(5001), random.nextBoolean());
+                case 3:
+                    update(randomChooseStock(stockIndex));
+            }
+//            //Only query requests are issued
 //            query(randomChooseStock(stockIndex));
-            trade(randomChooseStock(stockIndex), random.nextInt(50), random.nextBoolean());
+//            //Send only trade requests
+//            trade(randomChooseStock(stockIndex), random.nextInt(50), random.nextBoolean());
         }
         System.out.println(System.currentTimeMillis() - startTime);
     }
-
+    //Random stock selection
     public String randomChooseStock(int stockIndex){
         switch (stockIndex){
             case 1:
@@ -55,6 +55,7 @@ public class ClientThread implements Runnable {
         }
     }
 
+    //Query Request
     public void query(String name) {
         System.out.println("You are calling the query method, the stock name of the query is: " + name);
 
@@ -69,8 +70,9 @@ public class ClientThread implements Runnable {
         System.out.println("the name is: " + response.getStockName() +  " the price is: " + response.getPrice()+ " the trading volume is: " + response.getVolume());
     }
 
+    //Trade Requests
     public void trade(String name, int volume, boolean isBuy) {
-        System.out.println("You are calling the trade method, the stock name of the trade is: " + name + "the trade volume is :" + volume);
+        System.out.println("You are calling the trade method, the stock name of the trade is: " + name + " the trade volume is : " + volume + " is buy : " + isBuy);
         TradeRequest req = TradeRequest.newBuilder().setStockName(name).setTradeVolume(volume).setIsBuy(isBuy).build();
         TradeResponse response;
         try {
@@ -88,6 +90,7 @@ public class ClientThread implements Runnable {
         }
     }
 
+    //Update Request
     public void update(String name) {
         Random random = new Random();
         double price = Math.round(-20.00 + 200.00 * random.nextDouble()) * 1.00;

@@ -7,10 +7,11 @@ import java.util.concurrent.ConcurrentMap;
 public class ServiceImpl extends StockServiceGrpc.StockServiceImplBase {
     private static final int MAX_TRADING_VOLUME = 10000;
 
+    //Use ConcurrentHashMap to store stock information
     private final ConcurrentMap<String, Stock> stockMap = new ConcurrentHashMap<>();
 
     public ServiceImpl() {
-        // 初始化股票信息
+        // Initialize stock information
         stockMap.put("GameStart", new Stock("GameStart",15.39, 0));
         stockMap.put("FishCo", new Stock("FishCo",25.12, 0));
         stockMap.put("BoarCo", new Stock("BoarCo",1.98, 0));

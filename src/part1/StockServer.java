@@ -10,7 +10,6 @@ public class StockServer {
     private static InetAddress IP_ADDRESS;
    
     public static void main(String[] args) throws IOException {
-//        Scanner scanner = new Scanner(System.in);
 //        System.out.println("please enter the number of the thread" + "\n");
 //        int threadsNum = scanner.nextInt();
         ThreadPool threadPool = new ThreadPool(MAX_THREADS);

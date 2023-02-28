@@ -1,26 +1,32 @@
 package io.grpc.stock;
 
-import io.grpc.Channel;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import io.grpc.StatusRuntimeException;
-
-import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class StockClient {
     private static final int NUM_THREADS = 5;
+    private static String IP_ADDRESS;
+    private static int PORT;
 
     public static void main(String[] args) throws Exception {
-        // 创建一个线程池
+        // Create a thread pool
         ExecutorService executor = Executors.newFixedThreadPool(NUM_THREADS);
-        // 创建多个客户端线程并运行
+        Scanner scanner = new Scanner(System.in);
+        //enter the ip address of the server
+        System.out.println("Please enter the ip address you want to connect: ");
+        IP_ADDRESS = scanner.nextLine();
+        //enter the port of the server
+        System.out.println("Please enter the port you want to connect: ");
+        PORT = scanner.nextInt();
+
+
+        // Create multiple client threads and run them
         for (int i = 0; i < NUM_THREADS; i++) {
-            executor.submit(new ClientThread());
+            executor.submit(new ClientThread(IP_ADDRESS, PORT));
         }
-        // 等待所有线程运行结束
+        // Wait for all threads to finish running
         executor.shutdown();
         executor.awaitTermination(1, TimeUnit.MINUTES);
     }

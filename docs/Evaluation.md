@@ -4,11 +4,11 @@ On the server side, the size of the thread pool is 5. The client side builds var
 
 1. 5 clients, 1000 requests/client:
 
-![image-20230227113625273](/Users/richardzhao/Library/Application Support/typora-user-images/image-20230227113625273.png)
+![image-20230227113625273](./img/image-20230227113625273.png)
 
 2. 4 clients, 1000 requests/client:
 
-<img src="/Users/richardzhao/Library/Application Support/typora-user-images/image-20230227114459723.png" alt="image-20230227114459723" style="zoom:120%;" />
+<img src="./img/image-20230227114459723.png" alt="image-20230227114459723" style="zoom:120%;" />
 
 3. 3 clients, 1000 requests/client:
 
@@ -37,4 +37,5 @@ If the size of the thread pool of the server is set to be 3.
 3. 3 clients, 1000 requests/client:
 
 ![image-20230227120541467](/Users/richardzhao/Library/Application Support/typora-user-images/image-20230227120541467.png)
+
 

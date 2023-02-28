@@ -1,29 +1,27 @@
 package io.grpc.stock;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.Executor;
+import java.net.InetAddress;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import io.grpc.stub.StreamObserver;
+
 
 public class StockServer {
+    private static final int PORT = 9999;
+    private static InetAddress IP_ADDRESS;
 
     private Server server;
 
     private void start() throws IOException {
-        int port = 8888;
-        server = ServerBuilder.forPort(port)
+        server = ServerBuilder.forPort(PORT)
                 .addService(new ServiceImpl())
                 .executor(Executors.newFixedThreadPool(5))
                 .build()
                 .start();
-        //LogUtil.logger.info("Server started, listening on" + port);
-        System.out.println("Server started, listening on" + port);
+        IP_ADDRESS = InetAddress.getLocalHost();
+        System.out.println("Local IP address: " + IP_ADDRESS + "\n" + "Server started, listening on" + PORT);
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
