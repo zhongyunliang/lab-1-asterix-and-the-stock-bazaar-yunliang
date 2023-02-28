@@ -2,10 +2,10 @@
 ## Quick Start
 on sever side:
 ```
-javac -d Client.java ClientHandler.java PoolWorker.java Stock.java StockServer.java ThreadPool.java`
+javac -d Client.java ClientHandler.java PoolWorker.java Stock.java StockServer.java ThreadPool.java
 ```
 ```
-java part1.StockServer`
+java part1.StockServer
 ```
 
 ![image-20230227112934940](./img/image-20230227112934940.png)
@@ -15,7 +15,7 @@ on client side:
 javac -d Client.java ClientHandler.java PoolWorker.java Stock.java StockServer.java ThreadPool.java
 ```
 ```
-java part1.Client`
+java part1.Client
 ```
 
 ![image-20230227113056231](./img/image-20230227113056231.png)
