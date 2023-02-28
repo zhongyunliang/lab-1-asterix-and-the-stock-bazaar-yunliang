@@ -1,16 +1,22 @@
 # Part 1
+## Quick Start
 on sever side:
-
-1. `$ javac -d Client.java ClientHandler.java PoolWorker.java Stock.java StockServer.java ThreadPool.java`
-
-2. `$ java part1.StockServer`
+```
+javac -d Client.java ClientHandler.java PoolWorker.java Stock.java StockServer.java ThreadPool.java`
+```
+```
+java part1.StockServer`
+```
 
 ![image-20230227112934940](./img/image-20230227112934940.png)
 
 on client side:
-
-1. `$ javac -d Client.java ClientHandler.java PoolWorker.java Stock.java StockServer.java ThreadPool.java`
-2. `$ java part1.Client`
+```
+javac -d Client.java ClientHandler.java PoolWorker.java Stock.java StockServer.java ThreadPool.java
+```
+```
+java part1.Client`
+```
 
 ![image-20230227113056231](./img/image-20230227113056231.png)
 
@@ -32,11 +38,11 @@ Build project:
 Run the server:
 
 ```
-./build/install/part2/bin/hello-world-server
+./build/install/part2/bin/stock-server
 ```
 
 From another terminal, run the client:
 
 ```
-./build/install/part2/bin/hello-world-client
+./build/install/part2/bin/stock-client
 ```
