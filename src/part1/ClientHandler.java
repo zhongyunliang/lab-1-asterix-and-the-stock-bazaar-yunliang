@@ -25,6 +25,7 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         try {
+            //stream is used to make sure the communication works
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true); //with autoFlush on, no need to use flush()
 

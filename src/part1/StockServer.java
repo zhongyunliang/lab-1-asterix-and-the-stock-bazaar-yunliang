@@ -5,16 +5,15 @@ import java.util.Scanner;
 import java.util.concurrent.*;
 
 public class StockServer {
-    private static final int PORT = 8888;
-    private static final int MAX_THREADS = 10;
+    private static final int PORT = 7777;
+    private static final int MAX_THREADS = 5;
     private static InetAddress IP_ADDRESS;
    
     public static void main(String[] args) throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("please enter the number of the thread" + "\n");
-        int threadsNum = scanner.nextInt();
-        //create a static number (80) of threads and wait for requests
-        ThreadPool threadPool = new ThreadPool(threadsNum);
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("please enter the number of the thread" + "\n");
+//        int threadsNum = scanner.nextInt();
+        ThreadPool threadPool = new ThreadPool(MAX_THREADS);
         //get the ip address of the server
         try {
             IP_ADDRESS = InetAddress.getLocalHost();
@@ -31,6 +30,7 @@ public class StockServer {
             Socket clientSocket = serverSocket.accept();
             System.out.println("Accepted connection from " + clientSocket.getInetAddress().getHostAddress());
             try {
+                //run a method in ClientHandler with a tread in threadPool
                 threadPool.execute(new ClientHandler(clientSocket));
             } catch (RejectedExecutionException e) {
                 System.err.println("Request rejected: " + e);

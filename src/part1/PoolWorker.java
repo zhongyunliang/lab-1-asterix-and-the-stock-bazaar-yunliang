@@ -20,7 +20,6 @@ public class PoolWorker extends Thread {
                         System.out.println("An error occurred while waiting for a task: " + e.getMessage());
                     }
                 }
-
                 task = queue.poll();
             }
 
