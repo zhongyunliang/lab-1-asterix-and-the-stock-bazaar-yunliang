@@ -1,8 +1,9 @@
 # Part 1
 ## Quick Start
+First you should change your root directory to part1
 on sever side:
 ```
-javac -d Client.java ClientHandler.java PoolWorker.java Stock.java StockServer.java ThreadPool.java
+javac -d ./ Client.java ClientHandler.java PoolWorker.java Stock.java StockServer.java ThreadPool.java
 ```
 ```
 java part1.StockServer
@@ -12,7 +13,7 @@ java part1.StockServer
 
 on client side:
 ```
-javac -d Client.java ClientHandler.java PoolWorker.java Stock.java StockServer.java ThreadPool.java
+javac -d ./ Client.java ClientHandler.java PoolWorker.java Stock.java StockServer.java ThreadPool.java
 ```
 ```
 java part1.Client
