@@ -1,6 +1,4 @@
-Compsci 677: Distributed and Operating Systems
-
-Spring 2023
+# Compsci 677: Distributed and Operating Systems  --Spring 2023
 
 # Lab 1: Asterix and the Stock Bazaar
 
